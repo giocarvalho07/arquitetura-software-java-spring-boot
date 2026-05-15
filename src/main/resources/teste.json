@@ -1,0 +1,66 @@
+{
+  "info": {
+    "name": "API Produtos - Arquitetura em Camadas",
+    "description": "Collection para testes do CRUD de Produtos com blindagem por DTO e Mapper.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "POST - Criar Produto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"nome\": \"Cadeira Ergonômica Pro\",\n    \"preco\": 1250.00\n}"
+        },
+        "url": "http://localhost:8080/api/produtos"
+      }
+    },
+    {
+      "name": "GET - Listar Todos",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/produtos"
+      }
+    },
+    {
+      "name": "GET - Buscar por ID",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/produtos/1"
+      }
+    },
+    {
+      "name": "PUT - Atualizar Produto",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"nome\": \"Cadeira Ergonômica Ultra\",\n    \"preco\": 1400.00\n}"
+        },
+        "url": "http://localhost:8080/api/produtos/1"
+      }
+    },
+    {
+      "name": "DELETE - Remover Produto",
+      "request": {
+        "method": "DELETE",
+        "url": "http://localhost:8080/api/produtos/2"
+      }
+    }
+  ]
+}
+
+

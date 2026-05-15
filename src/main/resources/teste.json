@@ -1,0 +1,53 @@
+{
+  "info": {
+    "name": "API CRUD Completa - Java 21",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Listar Todos (GET)",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/products"
+      }
+    },
+    {
+      "name": "Buscar por ID (GET)",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/products/1"
+      }
+    },
+    {
+      "name": "Criar Produto (POST)",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Monitor 4K\", \"price\": 1800.0}"
+        },
+        "url": "http://localhost:8080/products"
+      }
+    },
+    {
+      "name": "Atualizar Produto (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Smartphone Gamer\", \"price\": 3200.0}"
+        },
+        "url": "http://localhost:8080/products/1"
+      }
+    },
+    {
+      "name": "Deletar Produto (DELETE)",
+      "request": {
+        "method": "DELETE",
+        "url": "http://localhost:8080/products/2"
+      }
+    }
+  ]
+}

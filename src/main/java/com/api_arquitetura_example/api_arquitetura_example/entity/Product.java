@@ -1,4 +1,4 @@
-package entity;
+package com.api_arquitetura_example.api_arquitetura_example.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

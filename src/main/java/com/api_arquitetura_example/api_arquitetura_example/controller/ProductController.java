@@ -1,11 +1,12 @@
-package controller;
 
-import entity.Product;
+package com.api_arquitetura_example.api_arquitetura_example.controller;
+
+import com.api_arquitetura_example.api_arquitetura_example.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.ProductService;
+import com.api_arquitetura_example.api_arquitetura_example.service.ProductService;
 
 import java.util.List;
 

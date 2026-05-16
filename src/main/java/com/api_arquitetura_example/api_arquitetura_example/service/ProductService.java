@@ -1,10 +1,10 @@
-package service;
+package com.api_arquitetura_example.api_arquitetura_example.service;
 
-import entity.Product;
+import com.api_arquitetura_example.api_arquitetura_example.entity.Product;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.ProductRepository;
+import com.api_arquitetura_example.api_arquitetura_example.repository.ProductRepository;
 import java.util.List;
 
 @Service

@@ -1,17 +1,13 @@
-package mapper;
+package com.api_arquitetura_example.api_arquitetura_example.mapper;
 
-import entity.Produto;
+import com.api_arquitetura_example.api_arquitetura_example.entity.Produto;
 import org.springframework.stereotype.Component;
-import request.ProdutoRequestDTO;
-import response.ProdutoResponseDTO;
+import com.api_arquitetura_example.api_arquitetura_example.request.ProdutoRequestDTO;
+import com.api_arquitetura_example.api_arquitetura_example.response.ProdutoResponseDTO;
 
 @Component
 public class ProdutoMapper {
 
-    /**
-     * Converte os dados recebidos na requisição para a Entidade JPA.
-     * O ID é passado como null pois será gerado pelo banco.
-     */
     public Produto toEntity(ProdutoRequestDTO dto) {
         if (dto == null) return null;
 
@@ -21,10 +17,6 @@ public class ProdutoMapper {
         return produto;
     }
 
-    /**
-     * Converte a Entidade JPA para o DTO de Resposta.
-     * Protege campos sensíveis ou internos da entidade.
-     */
     public ProdutoResponseDTO toResponse(Produto produto) {
         if (produto == null) return null;
 

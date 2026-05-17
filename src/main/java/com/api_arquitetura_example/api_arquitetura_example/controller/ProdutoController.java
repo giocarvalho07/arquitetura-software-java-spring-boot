@@ -1,16 +1,16 @@
-package controller;
+package com.api_arquitetura_example.api_arquitetura_example.controller;
 
-import apiSucesso.ApiSucesso;
-import entity.Produto;
+import com.api_arquitetura_example.api_arquitetura_example.apiSucesso.ApiSucesso;
+import com.api_arquitetura_example.api_arquitetura_example.entity.Produto;
 import jakarta.validation.Valid;
-import mapper.ProdutoMapper;
+import com.api_arquitetura_example.api_arquitetura_example.mapper.ProdutoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import request.ProdutoRequestDTO;
-import response.ProdutoResponseDTO;
-import service.ProdutoService;
+import com.api_arquitetura_example.api_arquitetura_example.request.ProdutoRequestDTO;
+import com.api_arquitetura_example.api_arquitetura_example.response.ProdutoResponseDTO;
+import com.api_arquitetura_example.api_arquitetura_example.service.ProdutoService;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,11 +27,9 @@ public class ProdutoController {
 
     @PostMapping
     public ResponseEntity<ApiSucesso<ProdutoResponseDTO>> create(@RequestBody @Valid ProdutoRequestDTO req) {
-        // Converte DTO -> Entidade -> Salva -> Converte Entidade Salva -> DTO de Resposta
         Produto salvo = service.salvar(mapper.toEntity(req));
         ProdutoResponseDTO res = mapper.toResponse(salvo);
 
-        // Gera o Header Location (URL de acesso ao novo recurso)
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(res.getId())
@@ -50,13 +48,20 @@ public class ProdutoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiSucesso<ProdutoResponseDTO>> getById(@PathVariable Long id) {
-        ProdutoResponseDTO res = mapper.toResponse(service.buscarPorId(id));
+        Produto p = service.buscarPorId(id);
+        if (p == null) {
+            return ResponseEntity.notFound().build();
+        }
+        ProdutoResponseDTO res = mapper.toResponse(p);
         return ResponseEntity.ok(new ApiSucesso<>("Produto encontrado", res));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ApiSucesso<ProdutoResponseDTO>> update(@PathVariable Long id, @RequestBody @Valid ProdutoRequestDTO req) {
         Produto p = service.buscarPorId(id);
+        if (p == null) {
+            return ResponseEntity.notFound().build();
+        }
         p.setNome(req.getNome());
         p.setPreco(req.getPreco());
 
@@ -70,4 +75,3 @@ public class ProdutoController {
         return ResponseEntity.noContent().build();
     }
 }
-

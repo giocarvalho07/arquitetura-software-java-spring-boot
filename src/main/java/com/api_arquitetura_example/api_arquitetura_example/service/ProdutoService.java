@@ -1,11 +1,11 @@
-package service;
+package com.api_arquitetura_example.api_arquitetura_example.service;
 
 
-import entity.Produto;
+import com.api_arquitetura_example.api_arquitetura_example.entity.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repository.ProdutoRepository;
+import com.api_arquitetura_example.api_arquitetura_example.repository.ProdutoRepository;
 
 import java.util.List;
 

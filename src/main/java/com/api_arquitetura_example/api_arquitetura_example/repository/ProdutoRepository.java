@@ -1,6 +1,6 @@
-package repository;
+package com.api_arquitetura_example.api_arquitetura_example.repository;
 
-import entity.Produto;
+import com.api_arquitetura_example.api_arquitetura_example.entity.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

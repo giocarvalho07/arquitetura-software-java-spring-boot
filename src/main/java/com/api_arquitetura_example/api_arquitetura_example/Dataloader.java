@@ -1,8 +1,10 @@
-import entity.Produto;
+package com.api_arquitetura_example.api_arquitetura_example;
+
+import com.api_arquitetura_example.api_arquitetura_example.entity.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import service.ProdutoService;
+import com.api_arquitetura_example.api_arquitetura_example.service.ProdutoService;
 
 @Component
 public class Dataloader implements CommandLineRunner {
@@ -21,19 +23,22 @@ public class Dataloader implements CommandLineRunner {
 
         // 2. Teste de Consulta (READ)
         Produto buscado = service.buscarPorId(p1.getId());
-        System.out.println(">>> [LOADER] Produto recuperado com sucesso: " + buscado.getNome());
+        if (buscado != null) {
+            System.out.println(">>> [LOADER] Produto recuperado com sucesso: " + buscado.getNome());
 
-        // 3. Teste de Atualização (UPDATE)
-        buscado.setNome("Teclado Mecânico Custom");
-        buscado.setPreco(450.0);
-        service.salvar(buscado);
-        System.out.println(">>> [LOADER] Produto ID " + buscado.getId() + " atualizado.");
+            // 3. Teste de Atualização (UPDATE)
+            buscado.setNome("Teclado Mecânico Custom");
+            buscado.setPreco(450.0);
+            service.salvar(buscado);
+            System.out.println(">>> [LOADER] Produto ID " + buscado.getId() + " atualizado.");
+        }
 
         // 4. Teste de Deleção (DELETE)
-        // Deletamos o p2 para validar a remoção
-        Long idParaDeletar = p2.getId();
-        service.deletar(idParaDeletar);
-        System.out.println(">>> [LOADER] Produto ID " + idParaDeletar + " removido com sucesso.");
+        if (p2 != null && p2.getId() != null) {
+            Long idParaDeletar = p2.getId();
+            service.deletar(idParaDeletar);
+            System.out.println(">>> [LOADER] Produto ID " + idParaDeletar + " removido com sucesso.");
+        }
 
         // Carga Final: Dados para teste manual via Postman
         service.salvar(new Produto(null, "Monitor UltraWide 34'", 2800.0));

@@ -1,47 +1,31 @@
 package com.api_arquitetura_example.api_arquitetura_example;
 
-import com.api_arquitetura_example.api_arquitetura_example.entity.Product;
+import com.api_arquitetura_example.api_arquitetura_example.entity.Produto;
+import com.api_arquitetura_example.api_arquitetura_example.repository.ProdutoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import com.api_arquitetura_example.api_arquitetura_example.repository.ProductRepository;
 
-import java.util.Arrays;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Component
+@RequiredArgsConstructor
 public class DataLoader implements CommandLineRunner {
 
     @Autowired
-    private ProductRepository repository;
+    private ProdutoRepository repository;
 
     @Override
-    public void run(String... args) throws Exception {
-        // 1. CREATE (Salvar)
-        Product p1 = new Product(null, "Smartphone", 2500.0);
-        Product p2 = new Product(null, "Laptop", 4500.0);
-        Product p3 = new Product(null, "Teclado Mech", 300.0);
-        repository.saveAll(Arrays.asList(p1, p2, p3));
-        System.out.println(">>> [CREATE] Produtos salvos!");
+    public void run(String... args) {
+        // Limpa o banco e insere dados iniciais
+        repository.deleteAll();
 
-        // 2. READ (Buscar)
-        List<Product> products = repository.findAll();
-        System.out.println(">>> [READ] Total de produtos: " + products.size());
+        repository.save(new Produto(null, "Smartphone G5", new BigDecimal("2500.00")));
+        repository.save(new Produto(null, "Notebook Pro", new BigDecimal("5500.00")));
+        repository.save(new Produto(null, "Teclado Mecânico", new BigDecimal("350.00")));
+        repository.save(new Produto(null, "Monitor UltraWide", new BigDecimal("2100.00")));
 
-        // 3. UPDATE (Atualizar)
-        repository.findById(1L).ifPresent(toUpdate -> {
-            toUpdate.setName("Smartphone Ultra Pro");
-            repository.save(toUpdate);
-            System.out.println(">>> [UPDATE] Produto ID 1 atualizado!");
-        });
-
-        // 4. DELETE (Deletar)
-        if (repository.existsById(3L)) {
-            repository.deleteById(3L);
-            System.out.println(">>> [DELETE] Produto ID 3 removido!");
-        }
-
-        System.out.println(">>> Setup Inicial Concluído com sucesso!");
+        System.out.println(">>> 4 Produtos iniciais carregados com sucesso!");
     }
 }
-

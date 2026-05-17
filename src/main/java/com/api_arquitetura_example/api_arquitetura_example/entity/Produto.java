@@ -16,8 +16,6 @@ import java.math.BigDecimal;
 @Table(name = "produtos")
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Produto {
 
     @Id

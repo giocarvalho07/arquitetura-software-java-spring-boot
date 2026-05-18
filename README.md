@@ -67,33 +67,23 @@ Adotar uma arquitetura de **quatro camadas** com os seguintes componentes obriga
 
 ## 🏗️ Arquitetura
 
-O projeto adota uma arquitetura de **quatro camadas** com separação rigorosa de responsabilidades:
-┌─────────────────────────────────────────────────────────────┐
-│ Camada de Apresentação │
-│ Controller (REST) + DTOs (Request/Response) + Envelopes │
-└─────────────────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────────────────┐
-│ Camada de Aplicação │
-│ Service (Regras de Negócio) + Mapper │
-└─────────────────────────────────────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────────────────────────────┐
-│ Camada de Persistência │
-│ Repository (Spring Data JPA) + Entidades JPA │
-└─────────────────────────────────────────────────────────────┘
+O projeto adota uma arquitetura de quatro camadas com separação rigorosa de responsabilidades:
+
+**Camada de Apresentação:** Controller (REST) + DTOs (Request/Response) + Envelopes
+
+**Camada de Aplicação:** Service (Regras de Negócio) + Mapper
+
+**Camada de Persistência:** Repository (Spring Data JPA) + Entidades JPA
 
 
 
-### 🔒 Blindagem da Entidade
+## 🔒 Blindagem da Entidade
 
-As entidades JPA **nunca** são expostas diretamente nas respostas da API. Toda comunicação externa ocorre via DTOs:
+As entidades JPA nunca são expostas diretamente nas respostas da API. Toda comunicação externa ocorre via DTOs:
+
 Cliente → ProdutoRequestDTO → Mapper → Produto (Entidade) → Repository
-↑ ↓
-└─────────── Resposta ← Mapper ←─────┘
-(ProdutoResponseDTO + ApiSucesso)
+
+Resposta (ProdutoResponseDTO + ApiSucesso) ← Mapper ← Produto (Entidade) Salvo
 
 
 ---
@@ -162,20 +152,20 @@ GET	/{id}	Buscar produto por ID	200 OK	-
 PUT	/{id}	Atualizar produto existente	200 OK	-
 DELETE	/{id}	Remover produto	204 No Content	-
 
-📦 Exemplos de Requisição e Resposta
+## 📦 Exemplos de Requisição e Resposta
 
-➕ POST /api/produtos - Criar Produto
+**POST /api/produtos - Criar Produto**
+
 Requisição:
-
-json
+```json
 {
     "nome": "Teclado Mecânico RGB",
     "preco": 350.00
 }
+```
 
 Resposta (201 Created):
-
-json
+```json
 {
     "mensagem": "Produto criado com sucesso",
     "dados": {
@@ -185,13 +175,16 @@ json
     },
     "timestamp": "2025-04-07T14:30:00"
 }
+```
 
-Header Location: Location: http://localhost:8080/api/produtos/1
+Header Location: `Location: http://localhost:8080/api/produtos/1`
 
-📋 GET /api/produtos - Listar Todos
+---
+
+**GET /api/produtos - Listar Todos**
+
 Resposta (200 OK):
-
-json
+```json
 {
     "mensagem": "Lista de produtos recuperada",
     "dados": [
@@ -208,11 +201,14 @@ json
     ],
     "timestamp": "2025-04-07T14:31:00"
 }
+```
 
-🔍 GET /api/produtos/1 - Buscar por ID
+---
+
+**GET /api/produtos/1 - Buscar por ID**
+
 Resposta (200 OK):
-
-json
+```json
 {
     "mensagem": "Produto encontrado",
     "dados": {
@@ -222,29 +218,32 @@ json
     },
     "timestamp": "2025-04-07T14:32:00"
 }
+```
 
 Erro (404 Not Found):
-
-json
+```json
 {
     "erro": "Produto não encontrado",
     "status": 404,
     "detalhes": ["Produto não encontrado com o ID: 999"],
     "timestamp": "2025-04-07T14:33:00"
 }
+```
 
-✏️ PUT /api/produtos/1 - Atualizar Produto
+---
+
+**PUT /api/produtos/1 - Atualizar Produto**
+
 Requisição:
-
-json
+```json
 {
     "nome": "Teclado Mecânico Customizado",
     "preco": 450.00
 }
+```
 
 Resposta (200 OK):
-
-json
+```json
 {
     "mensagem": "Produto atualizado com sucesso",
     "dados": {
@@ -254,9 +253,14 @@ json
     },
     "timestamp": "2025-04-07T14:34:00"
 }
+```
 
-❌ DELETE /api/produtos/1 - Remover Produto
+---
+
+**DELETE /api/produtos/1 - Remover Produto**
+
 Resposta (204 No Content): (sem corpo na resposta)
+
 
 🧪 Testando com Postman
 

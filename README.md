@@ -370,9 +370,9 @@ src/
 
 
 📊 Validações Implementadas
-Campo	Validação	Mensagem de erro
-nome	@NotBlank	"O nome do produto é obrigatório"
-preco	@Positive	"O preço deve ser um valor positivo"
+-Campo	Validação	Mensagem de erro
+-nome	@NotBlank	"O nome do produto é obrigatório"
+-preco	@Positive	"O preço deve ser um valor positivo"
 
 🔄 DataLoader (Dados Iniciais)
 

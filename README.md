@@ -36,15 +36,25 @@ Database (H2/PostgreSQL)
 ### Estrutura de Pacotes
 
 br.com.projeto/
+  
   controller/
+    
     ProductController.java
+  
   service/
+    
     ProductService.java
+  
   repository/
+    
     ProductRepository.java
+  
   model/
+    
     Product.java
+  
   config/
+    
     DataLoader.java
 
 
@@ -61,6 +71,8 @@ br.com.projeto/
 | Lombok | - | Redução de código boilerplate |
 | Maven | - | Gerenciador de dependências |
 
+---
+
 ## 📦 Funcionalidades
 
 ### Endpoints Disponíveis
@@ -74,7 +86,98 @@ br.com.projeto/
 | PUT | `/api/products/{id}` | Atualiza um produto existente |
 | DELETE | `/api/products/{id}` | Remove um produto |
 
-## 🔧 Como Executar
+
+## 📦 Exemplos de Requisição e Resposta
+
+**POST /api/products**
+
+Requisição:
+```json
+{
+    "nome": "Teclado Mecânico RGB",
+    "preco": 350.00
+}
+```
+
+Resposta (201 Created):
+```json
+{
+    "mensagem": "Produto criado com sucesso",
+    "dados": {
+        "id": 1,
+        "nome": "Teclado Mecânico RGB",
+        "preco": 350.00
+    },
+    "timestamp": "2025-04-07T14:30:00"
+}
+```
+
+
+---
+
+**GET /api/products**
+
+Resposta (200 OK):
+```json
+{
+    "mensagem": "Lista de produtos recuperada",
+    "dados": [
+        {"id": 1, "name": "Produto Novo", "price": 199.99},
+        {"id": 2, "name": "Produto Atualizado", "price": 299.99}
+    ],
+    "timestamp": "2025-04-07T14:31:00"
+}
+```
+
+---
+
+**GET /api/products/{id}**
+
+Resposta (200 OK):
+```json
+{
+    "mensagem": "Produto encontrado",
+    "dados": {"id": 1, "name": "Produto Novo", "price": 199.99},
+    "timestamp": "2025-04-07T14:32:00"
+}
+```
+
+Erro (404 Not Found):
+```json
+{
+    "erro": "Produto não encontrado",
+    "status": 404,
+    "detalhes": ["Produto não encontrado com o ID: 999"],
+    "timestamp": "2025-04-07T14:33:00"
+}
+```
+
+---
+
+**PUT /api/products/{id}**
+
+Requisição:
+```json
+{"name": "Produto Atualizado", "price": 299.99}
+```
+
+Resposta (200 OK):
+```json
+{
+    "mensagem": "Produto atualizado com sucesso",
+    "dados": {"id": 1, "name": "Produto Atualizado", "price": 299.99},
+    "timestamp": "2025-04-07T14:34:00"
+}
+```
+
+---
+
+**DELETE /api/products/{id}**
+
+// Response (204 No Content) - sem corpo
+
+
+## Como Executar:
 
 ### Pré-requisitos
 
@@ -93,63 +196,18 @@ cd product-api
 
 # Execute a aplicação
 ./mvnw spring-boot:run
-Acessos
+
+Acessos:
+
 API: http://localhost:8080/api/products
 
 H2 Console: http://localhost:8080/h2-console
-
 JDBC URL: jdbc:h2:mem:testdb
-
 Username: sa
-
 Password: (deixe em branco)
 
-📝 Exemplos de Uso
-Criar um produto
-bash
-curl -X POST http://localhost:8080/api/products \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Notebook Dell", "price": 4500.00}'
-Listar todos os produtos
-bash
-curl http://localhost:8080/api/products
-Buscar produto por ID
-bash
-curl http://localhost:8080/api/products/1
-Buscar produtos por preço máximo
-bash
-curl "http://localhost:8080/api/products/search/price?maxPrice=1000.00"
-Atualizar produto
-bash
-curl -X PUT http://localhost:8080/api/products/1 \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Notebook Dell Ultra", "price": 5200.00}'
-Deletar produto
-bash
-curl -X DELETE http://localhost:8080/api/products/2
-🗄️ Banco de Dados
-Configuração (application.yml)
-yaml
-spring:
-  datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
-  
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-    
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-DataLoader (Dados Iniciais)
+
+##DataLoader (Dados Iniciais)
 O sistema carrega automaticamente 5 produtos de exemplo ao iniciar:
 
 java
@@ -158,98 +216,97 @@ java
 - Mouse Logitech MX - R$ 399,99
 - Teclado Mecânico - R$ 499,99
 - Monitor 4K 32 - R$ 2.499,99
+
 🧪 Testes com Postman
 Importe a collection abaixo no Postman:
 
-json
 {
-  "info": {
-    "name": "Product API - CRUD Completo",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Listar Todos",
-      "request": {
-        "method": "GET",
-        "url": "http://localhost:8080/api/products"
-      }
+    "info": {
+        "name": "Products API - CRUD Completo",
+        "description": "Collection para testes da API de Produtos com DTO, Mapper e respostas padronizadas",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
-    {
-      "name": "Criar Produto",
-      "request": {
-        "method": "POST",
-        "header": [{"key": "Content-Type", "value": "application/json"}],
-        "body": {
-          "mode": "raw",
-          "raw": "{\"name\": \"Monitor 4K\", \"price\": 1800.00}"
+    "item": [
+        {
+            "name": "POST - Criar Produto",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"Teclado Mecânico RGB\",\n    \"price\": 350.00\n}"
+                },
+                "url": "http://localhost:8080/api/products"
+            }
         },
-        "url": "http://localhost:8080/api/products"
-      }
-    }
-  ]
+        {
+            "name": "GET - Listar Todos",
+            "request": {
+                "method": "GET",
+                "url": "http://localhost:8080/api/products"
+            }
+        },
+        {
+            "name": "GET - Buscar por ID",
+            "request": {
+                "method": "GET",
+                "url": "http://localhost:8080/api/products/1"
+            }
+        },
+        {
+            "name": "GET - Buscar por Preço",
+            "request": {
+                "method": "GET",
+                "url": "http://localhost:8080/api/products/search/price?maxPrice=500.0"
+            }
+        },
+        {
+            "name": "PUT - Atualizar Produto",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"Teclado Mecânico Customizado\",\n    \"price\": 450.00\n}"
+                },
+                "url": "http://localhost:8080/api/products/1"
+            }
+        },
+        {
+            "name": "DELETE - Remover Produto",
+            "request": {
+                "method": "DELETE",
+                "url": "http://localhost:8080/api/products/2"
+            }
+        }
+    ]
 }
+
+
 📚 Documentação da Arquitetura
 A arquitetura completa está documentada no arquivo ADR-001 (Architecture Decision Record), que inclui:
 
 ✅ Justificativas das decisões técnicas
-
 ✅ Alternativas consideradas
-
 ✅ Consequências positivas e negativas
-
 ✅ Padrões de implementação
 
-✅ Guias de migração e boas práticas
-
-🔄 Migração para Produção (PostgreSQL)
-Adicionar dependência:
-
-xml
-<dependency>
-    <groupId>org.postgresql</groupId>
-    <artifactId>postgresql</artifactId>
-</dependency>
-Configurar application-prod.yml:
-
-yaml
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/mydb
-    username: postgres
-    password: secret
-  jpa:
-    hibernate:
-      ddl-auto: validate
-Executar com profile de produção:
-
-bash
-java -jar app.jar --spring.profiles.active=prod
-📊 Logs e Monitoramento
-Logs SQL habilitados
-yaml
-logging:
-  level:
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-🤝 Como Contribuir
-Faça um fork do projeto
-
-Crie sua feature branch (git checkout -b feature/nova-feature)
-
-Commit suas mudanças (git commit -m 'feat: nova feature')
-
-Push para a branch (git push origin feature/nova-feature)
-
-Abra um Pull Request
 
 📖 Referências
+
 Spring Data JPA Documentation
-
 Hibernate ORM Documentation
-
 Spring Boot Reference Guide
-
 Baeldung JPA Series
 
 📄 Licença

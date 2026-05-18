@@ -22,13 +22,17 @@ Fornecer uma referência técnica para construção de APIs CRUD robustas, com f
 ### Camadas do Sistema
 Controller (REST API)
 ↓
+
 Service (Regras de negócio)
 ↓
+
 Repository (Acesso a dados)
 ↓
+
 Database (H2/PostgreSQL)
 
----
+
+
 
 ### Estrutura de Pacotes
 
@@ -49,7 +53,6 @@ br.com.projeto/
   config/
     DataLoader.java
 
----
 
 
 ## 🚀 Tecnologias Utilizadas
@@ -64,7 +67,7 @@ br.com.projeto/
 | Lombok | - | Redução de código boilerplate |
 | Maven | - | Gerenciador de dependências |
 
----
+
 
 ## 📦 Funcionalidades
 

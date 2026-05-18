@@ -1,4 +1,3 @@
-markdown
 # [API Rest, DTO, Mapper e Http Response] - Arquitetura de Sistemas com Spring Boot 3.4+
 
 [![Java](https://img.shields.io/badge/Java-21-blue.svg)](https://adoptium.net/)
@@ -262,16 +261,16 @@ Resposta (200 OK):
 Resposta (204 No Content): (sem corpo na resposta)
 
 
-🧪 Testando com Postman
+## 🧪 Testando com Postman
 
-Importar a Collection
-Abra o Postman
-Clique em Import → Raw text
-Cole o JSON abaixo e clique em Continue → Import
+Para importar a collection no Postman:
 
-<details> <summary>📋 Clique para ver a Postman Collection (JSON)</summary>
+1. Abra o Postman
+2. Clique em Import → Raw text
+3. Cole o JSON abaixo e clique em Continue → Import
 
-json
+**Collection JSON:**
+```json
 {
     "info": {
         "name": "API Produtos - Arquitetura em Camadas",
@@ -336,35 +335,39 @@ json
         }
     ]
 }
-</details>
+```
 
-📁 Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 src/
-├── main/
-│   ├── java/com/projeto/arquitetura/
-│   │   ├── controller/          # Endpoints REST
-│   │   │   └── ProdutoController.java
-│   │   ├── service/             # Regras de negócio
-│   │   │   └── ProdutoService.java
-│   │   ├── repository/          # Acesso a dados
-│   │   │   └── ProdutoRepository.java
-│   │   ├── model/               # Entidades JPA
-│   │   │   └── Produto.java
-│   │   ├── dto/                 # Data Transfer Objects
-│   │   │   ├── request/
-│   │   │   │   └── ProdutoRequestDTO.java
-│   │   │   └── response/
-│   │   │       ├── ProdutoResponseDTO.java
-│   │   │       ├── ApiSucesso.java
-│   │   │       └── ApiErro.java
-│   │   ├── mapper/              # Conversores Entidade ↔ DTO
-│   │   │   └── ProdutoMapper.java
-│   │   └── config/              # Configurações e DataLoader
-│   │       └── DataLoader.java
-│   └── resources/
-│       └── application.properties
-└── test/                        # Testes unitários e integração
+  main/
+    java/com/projeto/arquitetura/
+      controller/
+        ProdutoController.java (Endpoints REST)
+      service/
+        ProdutoService.java (Regras de negócio)
+      repository/
+        ProdutoRepository.java (Acesso a dados)
+      model/
+        Produto.java (Entidades JPA)
+      dto/
+        request/
+          ProdutoRequestDTO.java
+        response/
+          ProdutoResponseDTO.java
+          ApiSucesso.java
+          ApiErro.java
+      mapper/
+        ProdutoMapper.java (Conversores Entidade ↔ DTO)
+      config/
+        DataLoader.java (Configurações e dados iniciais)
+    resources/
+      application.properties
+  test/ (Testes unitários e integração)
+
+
+---
+
 
 📊 Validações Implementadas
 Campo	Validação	Mensagem de erro

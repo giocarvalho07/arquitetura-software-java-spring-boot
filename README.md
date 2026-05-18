@@ -1,8 +1,14 @@
+markdown
 # [API Rest, DTO, Mapper e Http Response] - Arquitetura de Sistemas com Spring Boot 3.4+
 
-## Status
+[![Java](https://img.shields.io/badge/Java-21-blue.svg)](https://adoptium.net/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4+-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Maven](https://img.shields.io/badge/Maven-3.9+-orange.svg)](https://maven.apache.org/)
 
-**Aceita** (Implementada a partir da versão 1.0 do sistema)
+
+# 📋 Sobre o Projeto
+API RESTful de alto nível para gerenciamento de produtos, implementando as melhores práticas de arquitetura com Spring Boot 3: **DTOs**, **Mapper**, **respostas HTTP semânticas** e **padronização de envelopes**.
+
 
 ## Contexto
 
@@ -56,54 +62,6 @@ Adotar uma arquitetura de **quatro camadas** com os seguintes componentes obriga
 | Retornar apenas o recurso criado (sem envelope) no POST | Falta padronização; frontend precisaria tratar diferentes formatos de sucesso/erro. |
 | Usar apenas `200 OK` para todas as operações | Viola a semântica HTTP; cliente não consegue diferenciar criação, atualização ou deleção apenas pelo status. |
 
-## Compliance com Spring Boot 3.4+
-
-A solução utiliza recursos compatíveis com as versões 3.4+ do Spring Boot:
-
-- `jakarta.validation` para validação com `@Valid`
-- `ResponseEntity` para controle total da resposta HTTP
-- `ServletUriComponentsBuilder` para construção do header `Location`
-- `@Transactional(readOnly = true)` para otimização de consultas
-- Suporte a Java 21 (LTS)
-
-## Referências
-
-- Ebook interno: "[API Rest, DTO, Mapper e Http Response] - Arquitetura de Sistemas com Spring Boot 3.4+"
-- [Spring Boot Reference – REST Repositories](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.developing-web-applications.spring-mvc)
-- [Jakarta Bean Validation](https://beanvalidation.org/)
-
----
-
-*Data da ADR: 2025-04-07*  
-*Autor: Equipe de Arquitetura*
-Basta copiar o conteúdo acima e salvar como adr-001-dto-mapper-http.md.
-
-use essa ADR paracriaum reame.md do proeto
-Com base na ADR criada, apresento a seguir um README.md completo para o projeto, documentando a arquitetura, configuração, execução e exemplos de uso da API.
-
-markdown
-# API Produtos - Arquitetura REST com Spring Boot 3
-
-[![Java](https://img.shields.io/badge/Java-21-blue.svg)](https://adoptium.net/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4+-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Maven](https://img.shields.io/badge/Maven-3.9+-orange.svg)](https://maven.apache.org/)
-
-API RESTful de alto nível para gerenciamento de produtos, implementando as melhores práticas de arquitetura com Spring Boot 3: **DTOs**, **Mapper**, **respostas HTTP semânticas** e **padronização de envelopes**.
-
----
-
-## 📋 Índice
-
-- [Arquitetura](#arquitetura)
-- [Decisões Arquiteturais (ADR)](#decisões-arquiteturais-adr)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Pré-requisitos](#pré-requisitos)
-- [Configuração e Execução](#configuração-e-execução)
-- [Endpoints da API](#endpoints-da-api)
-- [Exemplos de Requisição e Resposta](#exemplos-de-requisição-e-resposta)
-- [Testando com Postman](#testando-com-postman)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Licença](#licença)
 
 ---
 
@@ -153,6 +111,7 @@ Esta implementação segue a **ADR-001** documentada no projeto. As principais d
 | Status HTTP semânticos (`201 Created` com `Location`) | Melhor usabilidade da API |
 | Separação Controller → Service → Repository | Manutenibilidade e testabilidade |
 
+
 📄 **Documento completo da ADR:** [ADR-001](./docs/adr-001-dto-mapper-http.md)
 
 ---
@@ -182,34 +141,16 @@ Esta implementação segue a **ADR-001** documentada no projeto. As principais d
 
 ## 🚀 Configuração e Execução
 
-### 1. Clonar o repositório
-
-```bash
-git clone https://github.com/seu-usuario/api-produtos-spring.git
-cd api-produtos-spring
-2. Configurar o banco de dados (opcional)
-Por padrão, o projeto utiliza H2 Database em memória. Para alterar para MySQL/PostgreSQL, edite o application.properties:
-
-properties
-# Para MySQL
-spring.datasource.url=jdbc:mysql://localhost:3306/produtos_db
-spring.datasource.username=root
-spring.datasource.password=senha
-
-# Para PostgreSQL
-spring.datasource.url=jdbc:postgresql://localhost:5432/produtos_db
-spring.datasource.username=postgres
-spring.datasource.password=senha
 3. Executar o projeto
 bash
 mvn spring-boot:run
+
 4. Acessar o console H2 (em desenvolvimento)
+
 Abra no navegador: http://localhost:8080/h2-console
 
 JDBC URL: jdbc:h2:mem:testdb
-
 Username: sa
-
 Password: (deixe em branco)
 
 📍 Endpoints da API
@@ -221,7 +162,9 @@ GET	/	Listar todos os produtos	200 OK	-
 GET	/{id}	Buscar produto por ID	200 OK	-
 PUT	/{id}	Atualizar produto existente	200 OK	-
 DELETE	/{id}	Remover produto	204 No Content	-
+
 📦 Exemplos de Requisição e Resposta
+
 ➕ POST /api/produtos - Criar Produto
 Requisição:
 
@@ -309,15 +252,16 @@ json
 ❌ DELETE /api/produtos/1 - Remover Produto
 Resposta (204 No Content): (sem corpo na resposta)
 
+
 🧪 Testando com Postman
+
 Importar a Collection
 Abra o Postman
-
 Clique em Import → Raw text
-
 Cole o JSON abaixo e clique em Continue → Import
 
 <details> <summary>📋 Clique para ver a Postman Collection (JSON)</summary>
+
 json
 {
     "info": {
@@ -383,29 +327,10 @@ json
         }
     ]
 }
-</details>
-Teste via cURL
-bash
-# Criar produto
-curl -X POST http://localhost:8080/api/produtos \
-  -H "Content-Type: application/json" \
-  -d '{"nome":"Monitor 4K","preco":1999.99}'
 
-# Listar todos
-curl http://localhost:8080/api/produtos
 
-# Buscar por ID
-curl http://localhost:8080/api/produtos/1
-
-# Atualizar
-curl -X PUT http://localhost:8080/api/produtos/1 \
-  -H "Content-Type: application/json" \
-  -d '{"nome":"Monitor 4K Ultra","preco":1799.99}'
-
-# Deletar
-curl -X DELETE http://localhost:8080/api/produtos/1
 📁 Estrutura do Projeto
-text
+
 src/
 ├── main/
 │   ├── java/com/projeto/arquitetura/
@@ -431,23 +356,21 @@ src/
 │   └── resources/
 │       └── application.properties
 └── test/                        # Testes unitários e integração
+
 📊 Validações Implementadas
 Campo	Validação	Mensagem de erro
 nome	@NotBlank	"O nome do produto é obrigatório"
 preco	@Positive	"O preço deve ser um valor positivo"
+
 🔄 DataLoader (Dados Iniciais)
+
 Ao iniciar a aplicação, o DataLoader executa automaticamente:
 
 Insere produtos de exemplo
-
 Testa o ciclo completo do CRUD
-
 Deixa o banco populado para testes manuais
-
 Produtos carregados automaticamente:
-
 Monitor UltraWide 34' - R$ 2800,00
-
 Headset Gamer 7.1 - R$ 450,00
 
 📝 Licença
@@ -457,14 +380,16 @@ Este projeto está licenciado sob os termos da licença MIT.
 Equipe de Arquitetura - Decisões arquiteturais e implementação
 
 📚 Referências
+
 ADR-001 - Documento de Decisão Arquitetural
-
 Spring Boot Documentation
-
 REST API Best Practices
 
-*Última atualização: Abril/2025*
+## Referências
+- Ebook interno: "[API Rest, DTO, Mapper e Http Response] - Arquitetura de Sistemas com Spring Boot 3.4+"
+- [Spring Boot Reference – REST Repositories](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.developing-web-applications.spring-mvc)
+- [Jakarta Bean Validation](https://beanvalidation.org/)
 
-text
+*Última atualização: Abril/2025*
 
 Este `README.md` está pronto para ser adicionado à raiz do projeto. Ele documenta desde a arquitetura até exemplos práticos de uso, incluindo a referência à ADR criada anteriormente.

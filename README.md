@@ -145,11 +145,11 @@ Password: (deixe em branco)
 Base URL: http://localhost:8080/api/produtos
 
 Método	Endpoint	Descrição	Status HTTP	Header Location
-POST	/	Criar um novo produto	201 Created	/api/produtos/{id}
-GET	/	Listar todos os produtos	200 OK	-
-GET	/{id}	Buscar produto por ID	200 OK	-
-PUT	/{id}	Atualizar produto existente	200 OK	-
-DELETE	/{id}	Remover produto	204 No Content	-
+- POST	/	Criar um novo produto	201 Created	/api/produtos/{id}
+- GET	/	Listar todos os produtos	200 OK	-
+- GET	/{id}	Buscar produto por ID	200 OK	-
+- PUT	/{id}	Atualizar produto existente	200 OK	-
+- DELETE	/{id}	Remover produto	204 No Content	-
 
 ## 📦 Exemplos de Requisição e Resposta
 

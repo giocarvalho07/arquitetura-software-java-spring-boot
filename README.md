@@ -28,22 +28,23 @@ Repository (Acesso a dados)
 ↓
 Database (H2/PostgreSQL)
 
-text
+
 
 ### Estrutura de Pacotes
-br.com.projeto/
-├── controller/
-│ └── ProductController.java
-├── service/
-│ └── ProductService.java
-├── repository/
-│ └── ProductRepository.java
-├── model/
-│ └── Product.java
-└── config/
-└── DataLoader.java
 
-text
+br.com.projeto/
+  controller/
+    ProductController.java
+  service/
+    ProductService.java
+  repository/
+    ProductRepository.java
+  model/
+    Product.java
+  config/
+    DataLoader.java
+
+
 
 ## 🚀 Tecnologias Utilizadas
 

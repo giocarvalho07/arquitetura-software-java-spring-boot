@@ -20,24 +20,16 @@ Fornecer uma referência técnica para construção de APIs CRUD robustas, com f
 ## 🏗️ Arquitetura
 
 ### Camadas do Sistema
-Controller (REST API)
-↓
-
-Service (Regras de negócio)
-↓
-
-Repository (Acesso a dados)
-↓
-
-Database (H2/PostgreSQL)
-
+- Controller (REST API) ↓
+- Service (Regras de negócio) ↓
+- Repository (Acesso a dados) ↓
+- Database (H2/PostgreSQL)
 
 
 
 ### Estrutura de Pacotes
 
 br.com.projeto/
-  
   controller/
     ProductController.java
   
@@ -98,13 +90,7 @@ Requisição:
 Resposta (201 Created):
 ```json
 {
-    "mensagem": "Produto criado com sucesso",
-    "dados": {
-        "id": 1,
-        "nome": "Teclado Mecânico RGB",
-        "preco": 350.00
-    },
-    "timestamp": "2025-04-07T14:30:00"
+    "mensagem": "Produto criado com sucesso"
 }
 ```
 
@@ -116,12 +102,7 @@ Resposta (201 Created):
 Resposta (200 OK):
 ```json
 {
-    "mensagem": "Lista de produtos recuperada",
-    "dados": [
-        {"id": 1, "name": "Produto Novo", "price": 199.99},
-        {"id": 2, "name": "Produto Atualizado", "price": 299.99}
-    ],
-    "timestamp": "2025-04-07T14:31:00"
+    "mensagem": "Lista de produtos recuperada"
 }
 ```
 
@@ -132,9 +113,7 @@ Resposta (200 OK):
 Resposta (200 OK):
 ```json
 {
-    "mensagem": "Produto encontrado",
-    "dados": {"id": 1, "name": "Produto Novo", "price": 199.99},
-    "timestamp": "2025-04-07T14:32:00"
+    "mensagem": "Produto encontrado"
 }
 ```
 
@@ -142,9 +121,7 @@ Erro (404 Not Found):
 ```json
 {
     "erro": "Produto não encontrado",
-    "status": 404,
-    "detalhes": ["Produto não encontrado com o ID: 999"],
-    "timestamp": "2025-04-07T14:33:00"
+    "status": 404
 }
 ```
 
@@ -154,21 +131,24 @@ Erro (404 Not Found):
 
 Requisição:
 ```json
-{"name": "Produto Atualizado", "price": 299.99}
+{
+"name": "Produto Atualizado",
+"price": 299.99
+}
 ```
 
 Resposta (200 OK):
 ```json
 {
-    "mensagem": "Produto atualizado com sucesso",
-    "dados": {"id": 1, "name": "Produto Atualizado", "price": 299.99},
-    "timestamp": "2025-04-07T14:34:00"
+    "mensagem": "Produto atualizado com sucesso"
 }
 ```
 
 **DELETE /api/products/{id}**
 ```json
+{
 // Response (204 No Content) - sem corpo
+}
 ```
 
 
@@ -183,6 +163,7 @@ Resposta (200 OK):
 ### Passos para execução
 
 ```json
+{
 # Clone o repositório
 git clone https://github.com/seu-usuario/product-api.git
 
@@ -191,6 +172,7 @@ cd product-api
 
 # Execute a aplicação
 ./mvnw spring-boot:run
+}
 ```
 
 Acessos:

@@ -85,7 +85,7 @@ O projeto adota uma arquitetura de **quatro camadas** com separação rigorosa d
 │ Repository (Spring Data JPA) + Entidades JPA │
 └─────────────────────────────────────────────────────────────┘
 
-text
+
 
 ### 🔒 Blindagem da Entidade
 
@@ -95,7 +95,6 @@ Cliente → ProdutoRequestDTO → Mapper → Produto (Entidade) → Repository
 └─────────── Resposta ← Mapper ←─────┘
 (ProdutoResponseDTO + ApiSucesso)
 
-text
 
 ---
 
@@ -173,6 +172,7 @@ json
     "nome": "Teclado Mecânico RGB",
     "preco": 350.00
 }
+
 Resposta (201 Created):
 
 json
@@ -185,6 +185,7 @@ json
     },
     "timestamp": "2025-04-07T14:30:00"
 }
+
 Header Location: Location: http://localhost:8080/api/produtos/1
 
 📋 GET /api/produtos - Listar Todos
@@ -207,6 +208,7 @@ json
     ],
     "timestamp": "2025-04-07T14:31:00"
 }
+
 🔍 GET /api/produtos/1 - Buscar por ID
 Resposta (200 OK):
 
@@ -220,6 +222,7 @@ json
     },
     "timestamp": "2025-04-07T14:32:00"
 }
+
 Erro (404 Not Found):
 
 json
@@ -229,6 +232,7 @@ json
     "detalhes": ["Produto não encontrado com o ID: 999"],
     "timestamp": "2025-04-07T14:33:00"
 }
+
 ✏️ PUT /api/produtos/1 - Atualizar Produto
 Requisição:
 
@@ -237,6 +241,7 @@ json
     "nome": "Teclado Mecânico Customizado",
     "preco": 450.00
 }
+
 Resposta (200 OK):
 
 json
@@ -249,9 +254,9 @@ json
     },
     "timestamp": "2025-04-07T14:34:00"
 }
+
 ❌ DELETE /api/produtos/1 - Remover Produto
 Resposta (204 No Content): (sem corpo na resposta)
-
 
 🧪 Testando com Postman
 
@@ -327,7 +332,7 @@ json
         }
     ]
 }
-
+</details>
 
 📁 Estrutura do Projeto
 

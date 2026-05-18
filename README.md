@@ -29,8 +29,9 @@ Fornecer uma referência técnica para construção de APIs CRUD robustas, com f
 
 ### Estrutura de Pacotes
 
-br.com.projeto/
-  controller/
+- br.com.projeto/
+
+controller/
     ProductController.java
   
   service/

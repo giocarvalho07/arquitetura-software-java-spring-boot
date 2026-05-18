@@ -146,10 +146,8 @@ Resposta (200 OK):
 ```
 
 **DELETE /api/products/{id}**
-```json
-{
+```bash
    Response (204 No Content) - sem corpo
-}
 ```
 
 
@@ -164,7 +162,6 @@ Resposta (200 OK):
 ### Passos para execução
 
 ```bash
-{
 # Clone o repositório
 git clone https://github.com/seu-usuario/product-api.git
 
@@ -173,7 +170,6 @@ cd product-api
 
 # Execute a aplicação
 ./mvnw spring-boot:run
-}
 ```
 
 Acessos:

@@ -38,23 +38,18 @@ Database (H2/PostgreSQL)
 br.com.projeto/
   
   controller/
-    
     ProductController.java
   
   service/
-    
     ProductService.java
   
   repository/
-    
     ProductRepository.java
   
   model/
-    
     Product.java
   
   config/
-    
     DataLoader.java
 
 
@@ -170,11 +165,10 @@ Resposta (200 OK):
 }
 ```
 
----
-
 **DELETE /api/products/{id}**
-
+```json
 // Response (204 No Content) - sem corpo
+```
 
 
 ## Como Executar:
@@ -187,7 +181,7 @@ Resposta (200 OK):
 
 ### Passos para execução
 
-```bash
+```json
 # Clone o repositório
 git clone https://github.com/seu-usuario/product-api.git
 
@@ -196,6 +190,7 @@ cd product-api
 
 # Execute a aplicação
 ./mvnw spring-boot:run
+```
 
 Acessos:
 
@@ -220,6 +215,7 @@ java
 🧪 Testes com Postman
 Importe a collection abaixo no Postman:
 
+```json
 {
     "info": {
         "name": "Products API - CRUD Completo",
@@ -291,7 +287,7 @@ Importe a collection abaixo no Postman:
         }
     ]
 }
-
+```
 
 📚 Documentação da Arquitetura
 A arquitetura completa está documentada no arquivo ADR-001 (Architecture Decision Record), que inclui:

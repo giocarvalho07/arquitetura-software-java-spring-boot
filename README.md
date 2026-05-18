@@ -148,7 +148,7 @@ Resposta (200 OK):
 **DELETE /api/products/{id}**
 ```json
 {
-// Response (204 No Content) - sem corpo
+   Response (204 No Content) - sem corpo
 }
 ```
 
@@ -163,7 +163,7 @@ Resposta (200 OK):
 
 ### Passos para execução
 
-```json
+```bash
 {
 # Clone o repositório
 git clone https://github.com/seu-usuario/product-api.git

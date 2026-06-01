@@ -1,35 +1,54 @@
 package com.api_arquitetura_example.api_arquitetura_example.service;
 
+
 import com.api_arquitetura_example.api_arquitetura_example.entity.Product;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.api_arquitetura_example.api_arquitetura_example.repository.ProductRepository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+import java.util.Optional;
+
 
 @Service
 public class ProductService {
 
     @Autowired
-    private ProductRepository repository;
+    private ProductRepository productRepository;
 
-    public List<Product> findAll() { return repository.findAll(); }
+    @Transactional
+    public Product create(Product product) {
+        return productRepository.save(product);
+    }
 
-    public Product findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Não encontrado"));
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
+
+    public Optional<Product> findById(Long id) {
+        return productRepository.findById(id);
     }
 
     @Transactional
-    public Product create(Product obj) { return repository.save(obj); }
+    public Product update(Long id, Product productDetails) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+
+        product.setName(productDetails.getName());
+        product.setPrice(productDetails.getPrice());
+
+        return productRepository.save(product);
+    }
 
     @Transactional
-    public void delete(Long id) { repository.deleteById(id); }
+    public void delete(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+        productRepository.delete(product);
+    }
 
-    @Transactional
-    public Product update(Long id, Product obj) {
-        Product entity = repository.getReferenceById(id);
-        entity.setName(obj.getName());
-        entity.setPrice(obj.getPrice());
-        return repository.save(entity);
+    public boolean existsById(Long id) {
+        return productRepository.existsById(id);
     }
 }

@@ -49,12 +49,12 @@ API RESTful com autenticação JWT (JSON Web Token) para gerenciamento de produt
 | DELETE | `/api/products/{id}` | Deletar produto | Autenticado |
 
 ## Arquitetura Proposta
-Cliente → POST /api/auth/login → Controller → Service → Geração JWT
-↓
-(Bearer Token)
-↓
-Cliente → GET /api/products (Header: Authorization) → Filtro JWT → Validação → Controller
 
+Cliente → POST /api/auth/login → Controller → Service → Geração JWT
+
+↓ (Bearer Token)
+
+Cliente → GET /api/products (Header: Authorization) → Filtro JWT → Validação → Controller
 
 
 ## Componentes Implementados
@@ -101,18 +101,14 @@ public class ProductController {
 }
 ```
 
-Fluxo de Autenticação
-Usuário envia credenciais para /api/auth/login
+## Fluxo de Autenticação
 
-Servidor valida credenciais e gera token JWT assinado
-
-Token é retornado no AuthResponse
-
-Cliente armazena token (localStorage/sessionStorage)
-
-Cliente envia token no header: Authorization: Bearer <token>
-
-Servidor valida token antes de processar requisições protegidas
+1. Usuário envia credenciais para `/api/auth/login`
+2. Servidor valida credenciais e gera token JWT assinado
+3. Token é retornado no `AuthResponse`
+4. Cliente armazena token (localStorage/sessionStorage)
+5. Cliente envia token no header: `Authorization: Bearer <token>`
+6. Servidor valida token antes de processar requisições protegidas
 
 
 #Estrutura do Token JWT
@@ -133,15 +129,17 @@ Servidor valida token antes de processar requisições protegidas
 }
 ```
 
-Tecnologias Utilizadas
-Tecnologia	Versão	Finalidade
-Java	21	Linguagem base
-Spring Boot	3.4+	Framework principal
-Spring Security	6.0+	Segurança e autenticação
-JWT (JJWT)	0.11.5	Geração e validação de tokens
-Spring Data JPA	3.4+	Persistência de dados
-BCrypt	-	Criptografia de senhas
-H2 Database	-	Banco em memória
+## Tecnologias Utilizadas
+
+| Tecnologia | Versão | Finalidade |
+|------------|--------|-------------|
+| Java | 21 | Linguagem base |
+| Spring Boot | 3.4+ | Framework principal |
+| Spring Security | 6.0+ | Segurança e autenticação |
+| JWT (JJWT) | 0.11.5 | Geração e validação de tokens |
+| Spring Data JPA | 3.4+ | Persistência de dados |
+| BCrypt | - | Criptografia de senhas |
+| H2 Database | - | Banco em memória |
 
 
 ##Dependências Maven
@@ -194,17 +192,17 @@ H2 Database	-	Banco em memória
 
 
 #Como Executar
-Pré-requisitos
-Java 21
-Maven 3.9+
+Pré-requisitos:
+- Java 21
+- Maven 3.9+
 
-# Clone o repositório
+### Clone o repositório
 git clone https://github.com/seu-usuario/api-jwt-spring.git
 
-# Entre no diretório
+### Entre no diretório
 cd api-jwt-spring
 
-# Execute a aplicação
+### Execute a aplicação
 mvn spring-boot:run
 
 Testando a API
@@ -250,49 +248,52 @@ Authorization: Bearer <token_jwt>
 
 
 
-Decisões Arquiteturais
-Alternativas Consideradas
-Alternativa	Motivo da rejeição
-Basic Authentication	Envio de credenciais a cada requisição, menos seguro
-Session-based (JSESSIONID)	Stateful, não escala horizontalmente facilmente
-OAuth 2.0	Overkill para APIs internas/simples
-API Key	Sem diferenciação por usuário e roles
-Comparativo
-Característica	JWT	Session	Basic Auth
-Stateful/Stateless	Stateless	Stateful	Stateless
-Escalabilidade	Alta	Baixa	Alta
-Revogação	Difícil	Fácil	Difícil
-Custo por requisição	Médio	Baixo	Médio
-Segurança	Alta	Média	Baixa
-Consequências
-Positivas
-Stateless: API não mantém sessão em memória, facilitando escalabilidade horizontal
+## Decisões Arquiteturais
 
-Segurança: Senhas criptografadas e tokens assinados digitalmente
+### Alternativas Consideradas
 
-Interoperabilidade: JWT é padrão amplamente suportado por diferentes tecnologias
+| Alternativa | Motivo da rejeição |
+|-------------|---------------------|
+| Basic Authentication | Envio de credenciais a cada requisição, menos seguro |
+| Session-based (JSESSIONID) | Stateful, não escala horizontalmente facilmente |
+| OAuth 2.0 | Overkill para APIs internas/simples |
+| API Key | Sem diferenciação por usuário e roles |
 
-Performance: Validação de token sem consulta a banco de dados
+### Comparativo
 
-Flexibilidade: Possibilidade de incluir claims personalizadas (roles, permissões)
+| Característica | JWT | Session | Basic Auth |
+|----------------|-----|---------|-------------|
+| Stateful/Stateless | Stateless | Stateful | Stateless |
+| Escalabilidade | Alta | Baixa | Alta |
+| Revogação | Difícil | Fácil | Difícil |
+| Custo por requisição | Médio | Baixo | Médio |
+| Segurança | Alta | Média | Baixa |
 
-Negativas
-Tamanho do token: Pode crescer com muitas informações adicionais
+### Consequências
 
-Revogação: Tokens são válidos até expiração natural (não há revogação imediata)
+**Positivas**
 
-Armazenamento no cliente: Frontend precisa gerenciar o token com segurança
+- **Stateless**: API não mantém sessão em memória, facilitando escalabilidade horizontal
+- **Segurança**: Senhas criptografadas e tokens assinados digitalmente
+- **Interoperabilidade**: JWT é padrão amplamente suportado por diferentes tecnologias
+- **Performance**: Validação de token sem consulta a banco de dados
+- **Flexibilidade**: Possibilidade de incluir claims personalizadas (roles, permissões)
 
-Complexidade inicial: Configuração do Spring Security com JWT é mais elaborada
+**Negativas**
 
-Referências
-JSON Web Tokens (JWT) Specification (RFC 7519)
+- **Tamanho do token**: Pode crescer com muitas informações adicionais
+- **Revogação**: Tokens são válidos até expiração natural (não há revogação imediata)
+- **Armazenamento no cliente**: Frontend precisa gerenciar o token com segurança
+- **Complexidade inicial**: Configuração do Spring Security com JWT é mais elaborada
 
-Spring Security Documentation
+### Referências
 
-JJWT Library
+- [JSON Web Tokens (JWT) Specification (RFC 7519)](https://tools.ietf.org/html/rfc7519)
+- [Spring Security Documentation](https://docs.spring.io/spring-security/reference/)
+- [JJWT Library](https://github.com/jwtk/jjwt)
+- [OWASP JWT Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html)
 
-OWASP JWT Security Cheat Sheet
+---
 
 *Data: 2025-06-01*
-Autor: Equipe de Arquitetura
+*Autor: Equipe de Arquitetura*

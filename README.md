@@ -127,7 +127,7 @@ Rel(sistema, auth, "Valida token", "JWT")
 
 ![Diagrama de Containers](./docs/diagrams/containerC4.png)
 
-``` json
+``` puml
 @startuml
 !include <C4/C4_Container>
 title Diagrama de Container - API de Produtos
@@ -154,7 +154,7 @@ Rel(repository, db, "Leitura/Escrita", "JDBC")
 ![Diagrama de Componentes](./docs/diagrams/componentesC4.png)
 
 
-``` json
+``` puml
 @startuml
 !include <C4/C4_Component>
 title Diagrama de Componente - ProductController
@@ -182,7 +182,7 @@ Rel(authService, jwtFilter, "Configura")
 
 ![Diagrama de Código](./docs/diagrams/codigoC4.png)
 
-``` json
+``` puml
 @startuml
 !include <C4/C4_Codigo>
 title Diagrama de Código - ProductController.create()

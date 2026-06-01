@@ -1,0 +1,24 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+' Muda título
+title Diagrama de Containers - Sistema de Produtos API
+
+' Persona
+Person(admin, "Administrador", "Gerencia produtos")
+
+' Container da API
+System_Boundary(api, "API de Produtos") {
+    Container(spring_app, "Spring Boot Application", "Java 17, Spring Boot 3", "Gerencia operações CRUD de produtos")
+    Container(swagger_ui, "Swagger UI", "OpenAPI 3.0", "Documentação interativa da API")
+}
+
+' Banco de dados
+ContainerDb(database, "Database", "PostgreSQL/MySQL", "Armazena dados dos produtos")
+
+' Relacionamentos
+Rel(admin, spring_app, "Requisições HTTP via", "REST API")
+Rel(spring_app, database, "JDBC/Hibernate", "JPA")
+Rel(spring_app, swagger_ui, "Gera documentação via", "SpringDoc OpenAPI")
+
+@enduml

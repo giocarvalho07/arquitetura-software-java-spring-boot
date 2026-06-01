@@ -1,0 +1,30 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+' Muda título
+title Diagrama de Componentes - Spring Boot Application
+
+' Container Boundary
+Container_Boundary(spring_container, "Spring Boot Application") {
+
+    ' Componentes da API
+    Component(controller, "ProductController", "REST Controller", "Gerencia requisições HTTP e validações")
+    Component(service, "ProductService", "Service Layer", "Contém regras de negócio")
+    Component(repository, "ProductRepository", "Repository Layer", "Acesso a dados")
+    Component(entity, "Product Entity", "JPA Entity", "Mapeamento objeto-relacional")
+
+    ' Componente de documentação
+    Component(swagger, "Swagger/OpenAPI", "SpringDoc", "Documentação automática da API")
+}
+
+' Banco de dados externo
+ComponentDb(database, "Database", "PostgreSQL/MySQL", "Armazena dados")
+
+' Relacionamentos
+Rel(controller, service, "Chama métodos", "Java")
+Rel(service, repository, "Chama métodos", "Java")
+Rel(repository, entity, "Utiliza", "JPA")
+Rel(repository, database, "Executa queries", "JDBC")
+Rel(controller, swagger, "Anotações", "@Operation, @Tag")
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+' Muda título
+title Diagrama de Contexto - Sistema de Gestão de Produtos
+
+' Personas (Atores)
+Person(admin, "Administrador", "Gerencia produtos do sistema")
+Person(usuario, "Usuário", "Consulta produtos")
+
+' Sistemas externos
+System(sistema, "Sistema de Produtos API", "API REST para gerenciar produtos")
+
+' Relacionamentos
+Rel(admin, sistema, "CRUD de produtos via", "HTTP/REST")
+Rel(usuario, sistema, "Consulta produtos via", "HTTP/REST")
+
+' Limites do sistema
+System_Ext(db, "Banco de Dados", "PostgreSQL/MySQL", "Armazena dados dos produtos")
+
+Rel(sistema, db, "Persiste dados via", "JDBC/Hibernate")
+
+@enduml

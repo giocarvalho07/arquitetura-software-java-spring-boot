@@ -1,0 +1,72 @@
+@startuml
+title Diagrama de Classes - Fluxo CRUD de Produtos
+
+' Estilo
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor white
+    BorderColor black
+    ArrowColor darkgreen
+}
+
+' Entity
+class Product {
+    - Long id
+    - String name
+    - Double price
+    --
+    + Product()
+    + getId(): Long
+    + getName(): String
+    + getPrice(): Double
+    + setId(Long): void
+    + setName(String): void
+    + setPrice(Double): void
+}
+
+' Repository
+interface ProductRepository {
+    + findAll(): List<Product>
+    + findById(Long): Optional<Product>
+    + save(Product): Product
+    + deleteById(Long): void
+    + getReferenceById(Long): Product
+    + findByPriceLowerThan(Double): List<Product>
+}
+
+' Service
+class ProductService {
+    - ProductRepository repository
+    --
+    + findAll(): List<Product>
+    + findById(Long): Product
+    + create(Product): Product
+    + delete(Long): void
+    + update(Long, Product): Product
+}
+
+' Controller
+class ProductController {
+    - ProductService service
+    --
+    + getAll(): List<Product>
+    + insert(Product): ResponseEntity<Product>
+    + update(Long, Product): ResponseEntity<Product>
+    + delete(Long): ResponseEntity<Void>
+    + getById(Long): ResponseEntity<Product>
+}
+
+' Relacionamentos
+ProductRepository ..> Product : <<use>>
+ProductService --> ProductRepository : <<inject>>
+ProductService ..> Product : <<use>>
+ProductController --> ProductService : <<inject>>
+ProductController ..> Product : <<use>>
+
+' Anotações
+note top of ProductController : @RestController\n@RequestMapping("/products")
+note top of ProductService : @Service\n@Transactional
+note top of ProductRepository : @Repository
+note top of Product : @Entity\n@Table(name = "tb_product")
+
+@enduml

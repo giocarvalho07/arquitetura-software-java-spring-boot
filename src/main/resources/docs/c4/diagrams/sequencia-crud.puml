@@ -1,0 +1,33 @@
+@startuml
+title Diagrama de Sequência - Fluxo de Criação de Produto
+
+actor Administrador
+participant "ProductController" as Controller
+participant "ProductService" as Service
+participant "ProductRepository" as Repository
+database "Database" as DB
+
+Administrador -> Controller: POST /products\n{name, price}
+activate Controller
+
+Controller -> Service: create(product)
+activate Service
+
+Service -> Repository: save(product)
+activate Repository
+
+Repository -> DB: INSERT INTO tb_product...
+activate DB
+DB --> Repository: ID gerado
+deactivate DB
+
+Repository --> Service: Product with ID
+deactivate Repository
+
+Service --> Controller: Product saved
+deactivate Service
+
+Controller --> Administrador: 201 Created\n{id, name, price}
+deactivate Controller
+
+@enduml

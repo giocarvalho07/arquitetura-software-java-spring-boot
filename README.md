@@ -105,7 +105,7 @@ public class ProductController {
 
 ![Diagrama de Contexto](./docs/diagrams/contextoC4.png)
 
-``` json
+``` puml
 @startuml
 !include <C4/C4_Context>
 !include <C4/C4_Container>

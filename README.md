@@ -91,10 +91,19 @@ public class ProductController {
 }
 ```
 
+## Diagramas C4
+
+### Diagrama de Contexto
+
+
+
+
 
 ##Estrutura C4 com PlantUML
 
 ###Nível 1 - Diagrama de Contexto
+
+![Diagrama de Contexto](./docs/diagrams/contextoC4.png)
 
 ``` json
 @startuml
@@ -115,6 +124,8 @@ Rel(sistema, auth, "Valida token", "JWT")
 
 
 ###Nível 2 - Diagrama de Container
+
+![Diagrama de Containers](./docs/diagrams/containerC4.png)
 
 ``` json
 @startuml
@@ -139,6 +150,9 @@ Rel(repository, db, "Leitura/Escrita", "JDBC")
 ```
 
 ###Nível 3 - Diagrama de Componente
+
+![Diagrama de Componentes](./docs/diagrams/componentesC4.png)
+
 
 ``` json
 @startuml
@@ -165,6 +179,8 @@ Rel(authService, jwtFilter, "Configura")
 
 
 ### Nível 4: Diagrama de Código
+
+![Diagrama de Código](./docs/diagrams/codigoC4.png)
 
 ``` json
 @startuml
@@ -215,7 +231,10 @@ deactivate Controller
 | Spring Data JPA | 3.4+ | Persistência de dados |
 | H2 Database | - | Banco em memória |
 
+
 ## Decisões Arquiteturais
+
+![Diagrama de Sequência](./docs/diagrams/crudC4.png)
 
 ### Alternativas Consideradas
 

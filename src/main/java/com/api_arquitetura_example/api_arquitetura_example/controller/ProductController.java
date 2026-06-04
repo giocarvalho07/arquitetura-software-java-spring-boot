@@ -1,4 +1,3 @@
-
 package com.api_arquitetura_example.api_arquitetura_example.controller;
 
 import com.api_arquitetura_example.api_arquitetura_example.entity.Product;
@@ -7,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.api_arquitetura_example.api_arquitetura_example.service.ProductService;
-
 import java.util.List;
 
 @RestController
@@ -18,19 +16,21 @@ public class ProductController {
     private ProductService service;
 
     @GetMapping
-    public List<Product> getAll() {
-        return service.findAll();
+    public ResponseEntity<List<Product>> getAll() {
+        List<Product> products = service.findAll();
+        return ResponseEntity.ok(products);
     }
 
     @PostMapping
     public ResponseEntity<Product> insert(@RequestBody Product obj) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(obj));
+        Product created = service.create(obj);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody Product obj) {
-        obj = service.update(id, obj);
-        return ResponseEntity.ok().body(obj);
+        Product updated = service.update(id, obj);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
@@ -42,8 +42,6 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<Product> getById(@PathVariable Long id) {
         Product obj = service.findById(id);
-        return ResponseEntity.ok().body(obj);
+        return ResponseEntity.ok(obj);
     }
-
 }
-

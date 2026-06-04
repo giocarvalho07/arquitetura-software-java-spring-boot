@@ -1,0 +1,12 @@
+package com.api_arquitetura_example.api_arquitetura_example.exception;
+
+public class EntityNotFoundException extends RuntimeException {
+
+    public EntityNotFoundException(String message) {
+        super(message);
+    }
+
+    public EntityNotFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}

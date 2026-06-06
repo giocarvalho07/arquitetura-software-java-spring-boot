@@ -1,4 +1,4 @@
-# Product API - CRUD com CI/CD e Docker
+# [CI-CD e Deploy] - Arquitetura de Sistemas com Spring Boot 3.4+
 
 Uma API RESTful para gerenciamento de produtos com pipeline automatizado de integração e entrega contínua.
 

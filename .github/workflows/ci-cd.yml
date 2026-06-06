@@ -2,9 +2,9 @@ name: Java CI/CD with Docker
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main", "master", "10/10-CI-CD&Deploy" ]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main", "master", "10/10-CI-CD&Deploy" ]
 
 jobs:
   build-and-test:

@@ -43,7 +43,7 @@ Implementar containerização com Docker utilizando Dockerfile multi-estágio pa
 | `Dockerfile` | Define a imagem da aplicação com build multi-estágio |
 | `docker-compose.yml` | Orquestra a aplicação e banco de dados |
 
-## Estrutura do Dockerfile
+### Estrutura do Dockerfile
 
 ```dockerfile
 # Estágio de execução: utiliza uma imagem leve do JDK 21
@@ -62,7 +62,7 @@ EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app.jar"]
 ```
 
-# Explicação das Instruções Dockerfile
+### Explicação das Instruções Dockerfile
 
 | Instrução | Descrição |
 |-----------|-----------|
@@ -73,7 +73,7 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 | `ENTRYPOINT ["java", "-jar", "/app.jar"]` | Comando executado ao iniciar o container |
 
 
-## Estrutura do Docker-compose
+### Estrutura do Docker-compose
 
 ```yml
 version: '3.8'
@@ -92,7 +92,7 @@ services:
       SPRING_H2_CONSOLE_ENABLED: "true"
 ```
 
-# Explicação das Configurações docker-compose.yml
+### Explicação das Configurações docker-compose.yml
 
 | Configuração | Descrição |
 |--------------|-----------|
@@ -106,7 +106,7 @@ services:
 
 
 
-##Comandos Docker
+## Comandos Docker
 
 ### Build e Execução
 
@@ -130,9 +130,9 @@ docker-compose down -v
 docker-compose up --build
 ```
 
-# Acessos e Testes
+## Acessos e Testes
 
-## Endpoints Disponíveis
+### Endpoints Disponíveis
 
 | Recurso | URL | Descrição |
 |---------|-----|-----------|
@@ -140,7 +140,7 @@ docker-compose up --build
 | Produto Específico | `http://localhost:8080/products/{id}` | Busca um produto específico pelo seu ID |
 | H2 Console | `http://localhost:8080/h2-console` | Interface web administrativa do banco de dados H2 |
 
-## Credenciais H2 Console
+### Credenciais H2 Console
 
 | Campo | Valor |
 |-------|-------|

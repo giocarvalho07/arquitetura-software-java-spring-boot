@@ -70,7 +70,7 @@ public class ProductCacheTest {
         long fimPrimeira = System.currentTimeMillis();
         long tempoPrimeira = fimPrimeira - inicioPrimeira;
 
-        System.out.println("\n>>> CACHE EVICT TEST (UPDATE) <<<");
+        System.out.println("\n>>> PERFORMANCE TEST - CACHE EVICT (UPDATE)<<<");
         System.out.println("Tempo 1ª chamada (sem cache): " + tempoPrimeira + "ms");
 
         // Atualiza o produto - deve limpar o cache
@@ -107,7 +107,7 @@ public class ProductCacheTest {
         cachedProduct = Objects.requireNonNull(cacheManager.getCache("products")).get(productId);
         assertTrue(cachedProduct == null, "Produto não deveria estar no cache após deleção");
 
-        System.out.println("\n>>> CACHE EVICT TEST (DELETE) <<<");
+        System.out.println("\n>>> PERFORMANCE TEST - CACHE EVICT (DELETE) <<<");
         System.out.println("Cache limpo com sucesso após deleção!");
     }
 }

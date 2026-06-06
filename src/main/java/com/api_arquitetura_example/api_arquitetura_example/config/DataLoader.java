@@ -1,4 +1,4 @@
-package com.api_arquitetura_example.api_arquitetura_example;
+package com.api_arquitetura_example.api_arquitetura_example.config;
 
 import com.api_arquitetura_example.api_arquitetura_example.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;

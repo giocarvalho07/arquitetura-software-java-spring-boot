@@ -1,4 +1,4 @@
-# [Observabilidade e Monitoramento] - API de Produtos com Spring Boot 3.4+
+# [Observabilidade] - Arquitetura de Sistemas com Spring Boot 3.4+
 
 Solução completa de observabilidade para a API de Produtos, incluindo métricas, tracing distribuído, health checks e cobertura de testes.
 
